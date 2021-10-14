@@ -10,7 +10,7 @@ class StorageModule {
     @Singleton
     @Persisted
     @Provides
-    fun provideGitHubDatabaseStorage(context: Context): GitHubStorage =
+    fun provideWeatherDatabaseStorage(context: Context): GitHubStorage =
         Room.databaseBuilder(context, GitHubStorage::class.java, "weather.db")
             .fallbackToDestructiveMigration()
 //            .addMigrations(GitHub1to2Migration, GitHub2to3Migration)
@@ -18,7 +18,7 @@ class StorageModule {
 
     @InMemory
     @Provides
-    fun provideGitHubInMemoryDatabaseStorage(context: Context): GitHubStorage =
+    fun provideWeatherInMemoryDatabaseStorage(context: Context): GitHubStorage =
         Room.inMemoryDatabaseBuilder(context, GitHubStorage::class.java)
             .fallbackToDestructiveMigration()
             .build()

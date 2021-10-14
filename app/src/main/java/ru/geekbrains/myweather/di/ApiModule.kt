@@ -23,7 +23,7 @@ class ApiModule {
             .baseUrl("https://api.openweathermap.org")
             .client(
                 OkHttpClient.Builder()
-                    .addInterceptor(WeatherApiInterceptor)
+//                    .addInterceptor(WeatherApiInterceptor)
                     .addInterceptor(HttpLoggingInterceptor().apply {
                         level = HttpLoggingInterceptor.Level.BODY
                     })

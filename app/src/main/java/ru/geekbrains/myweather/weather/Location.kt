@@ -1,12 +1,19 @@
 package ru.geekbrains.myweather.weather
 
-import androidx.room.Entity
-import androidx.room.PrimaryKey
+import com.google.gson.annotations.SerializedName
 
-@Entity(tableName = "location")
 data class Location(
-    @PrimaryKey(autoGenerate = true)
+    @SerializedName("coord")
+    val coord: Coord,
+    @SerializedName("id")
     val id: Int,
+    @SerializedName("name")
+    val name: String
+)
+
+data class Coord(
+    @SerializedName("lat")
     val lat: Double,
-    val lon: Double
+    @SerializedName("lon")
+    val lon: Double,
 )

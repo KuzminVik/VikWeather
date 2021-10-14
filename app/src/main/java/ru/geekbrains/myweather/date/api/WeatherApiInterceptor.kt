@@ -10,7 +10,7 @@ object WeatherApiInterceptor : Interceptor {
         chain.proceed(
             chain.request()
                 .newBuilder()
-                .header("Authorization", Credentials.basic(GITHUB_USER_NAME, GITHUB_USER_PASSWORD))
+//                .header("Authorization", Credentials.basic(ABC, ABC))
                 .build()
         )
 
