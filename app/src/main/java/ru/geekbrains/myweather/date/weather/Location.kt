@@ -1,4 +1,4 @@
-package ru.geekbrains.myweather.weather
+package ru.geekbrains.myweather.date.weather
 
 import com.google.gson.annotations.SerializedName
 

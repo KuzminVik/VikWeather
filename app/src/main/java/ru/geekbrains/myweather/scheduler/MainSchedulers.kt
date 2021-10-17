@@ -3,7 +3,7 @@ package ru.geekbrains.myweather.scheduler
 import io.reactivex.Scheduler
 import io.reactivex.android.schedulers.AndroidSchedulers
 
-class MainSchedulers: SchedulersThreads {
+class MainSchedulers: ISchedulers {
 
     override fun mainThread(): Scheduler = AndroidSchedulers.mainThread()
 

@@ -1,8 +1,6 @@
 package ru.geekbrains.myweather.presentation
 
 import com.github.terrakok.cicerone.Cicerone
-import com.google.android.gms.location.FusedLocationProviderClient
-import com.google.android.gms.location.LocationServices
 import dagger.android.AndroidInjector
 import dagger.android.DaggerApplication
 import io.reactivex.plugins.RxJavaPlugins

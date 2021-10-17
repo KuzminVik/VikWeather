@@ -2,7 +2,7 @@ package ru.geekbrains.myweather.scheduler
 
 import io.reactivex.Scheduler
 
-interface SchedulersThreads {
+interface ISchedulers {
 
     fun mainThread(): Scheduler
     fun backgroundThread(): Scheduler

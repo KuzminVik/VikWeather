@@ -6,4 +6,17 @@
     <string name="my_weather">Моя погода</string>
     <string name="my_search">Поиск</string>
     <string name="my_settings">Настройки</string>
+    <string name="icon">Иконка</string>
+    <string name="temperature">%1$d°</string>
+    <string name="time">time</string>
+    <string name="city">City</string>
+    <string name="descriptions">desription</string>
+    <string name="temp_feel">temp feel</string>
+    <string name="cloud_cover">Облачность</string>
+    <string name="pressure">Давление</string>
+    <string name="humidity">Влажность</string>
+    <string name="dew_point">Точка росы</string>
+    <string name="visibility">Видимость</string>
+    <string name="wind">скорость ветра</string>
+    <string name="enterTheСity">Введите название города</string>
 </resources>

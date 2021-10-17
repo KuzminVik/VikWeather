@@ -8,6 +8,8 @@ import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasAndroidInjector
 import dagger.android.support.AndroidSupportInjection
 import moxy.MvpAppCompatFragment
+import ru.geekbrains.myweather.scheduler.ISchedulers
+import ru.geekbrains.myweather.scheduler.MainSchedulers
 import javax.inject.Inject
 
 abstract class AbsFragment(@LayoutRes contentLayoutId: Int) : MvpAppCompatFragment(contentLayoutId),
@@ -16,11 +18,11 @@ abstract class AbsFragment(@LayoutRes contentLayoutId: Int) : MvpAppCompatFragme
     @Inject
     lateinit var androidInjector: DispatchingAndroidInjector<Any>
 
-//    @Inject
-//    lateinit var router: Router
-//
-//    @Inject
-//    lateinit var schedulers: Schedulers
+    @Inject
+    lateinit var router: Router
+
+    @Inject
+    lateinit var schedulers: ISchedulers
 
     override fun onAttach(context: Context) {
         AndroidSupportInjection.inject(this)

@@ -7,15 +7,17 @@ import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjectionModule
 import dagger.android.AndroidInjector
-import io.reactivex.schedulers.Schedulers
 import ru.geekbrains.myweather.presentation.BaseActivity
-import ru.geekbrains.myweather.scheduler.SchedulersThreads
+import ru.geekbrains.myweather.scheduler.ISchedulers
 import javax.inject.Singleton
 
 @Singleton
 @Component(
     modules =
-    [AndroidInjectionModule::class, ApiModule::class, StorageModule::class]
+    [AndroidInjectionModule::class,
+        ApiModule::class,
+        StorageModule::class,
+        WeatherModule::class]
 )
 
 interface BaseActivityComponent : AndroidInjector<BaseActivity> {
@@ -33,7 +35,7 @@ interface BaseActivityComponent : AndroidInjector<BaseActivity> {
         fun withNavigatorHolder(navigatorHolder: NavigatorHolder): Builder
 
         @BindsInstance
-        fun withSchedulers(schedulers: SchedulersThreads): Builder
+        fun withSchedulers(schedulers: ISchedulers): Builder
 
         fun build(): BaseActivityComponent
     }

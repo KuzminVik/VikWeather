@@ -1,11 +1,11 @@
-package ru.geekbrains.myweather.weather
+package ru.geekbrains.myweather.date.weather
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
-@Entity(tableName = "weather")
+@Entity(tableName = "weathers")
 data class WeatherEntity(
     @PrimaryKey
     @ColumnInfo(name = "id") val id: Int,
@@ -23,8 +23,8 @@ data class WeatherEntity(
     @ColumnInfo(name = "uvi") val uvi: Double,
     @ColumnInfo(name = "clouds") val clouds: Int,
     @ColumnInfo(name = "visibility") val visibility: Int,
-    @ColumnInfo(name = "windSpeed") val windSpeed: Int,
-    @ColumnInfo(name = "windDeg") val windDeg: Int,
+    @ColumnInfo(name = "windSpeed") val windSpeed: Double,
+    @ColumnInfo(name = "windDeg") val windDeg: Double,
     @ColumnInfo(name = "description") val description: String,
     @ColumnInfo(name = "icon") val icon: String              //URL is http://openweathermap.org/img/wn/10d@2x.png
 )
@@ -46,9 +46,9 @@ data class Current(
     @SerializedName("uvi") val uvi: Double,                // Уф-индекс
     @SerializedName("clouds") val clouds: Int,
     @SerializedName("visibility") val visibility: Int,
-    @SerializedName("wind_speed") val windSpeed: Int,
-    @SerializedName("wind_deg") val windDeg: Int,
-    @SerializedName("weather") val weather: Weather
+    @SerializedName("wind_speed") val windSpeed: Double,
+    @SerializedName("wind_deg") val windDeg: Double,
+    @SerializedName("weather") val weather: List<Weather>
 )
 
 data class Weather(

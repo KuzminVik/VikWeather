@@ -9,7 +9,7 @@ import ru.geekbrains.myweather.presentation.arguments
 import ru.geekbrains.myweather.presentation.search.SearchView
 import ru.geekbrains.myweather.R.layout.fragment_settings
 
-class SettingsFragment : AbsFragment(fragment_settings), SearchView {
+class SettingsFragment : AbsFragment(fragment_settings), SettingsView {
 
     private val viewBinding: FragmentSettingsBinding by viewBinding()
 
