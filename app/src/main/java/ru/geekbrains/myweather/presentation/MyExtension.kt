@@ -23,10 +23,6 @@ fun Fragment.arguments(vararg arguments: Pair<String, Any>): Fragment {
 
 fun View.click(click: () -> Unit) = setOnClickListener { click() }
 
-operator fun CompositeDisposable.plusAssign(disposable: Disposable) {
-    add(disposable)
-}
-
 fun Activity.getMyLocation(requestCode: Int): Pair<Double, Double>{
     val fusedLocationClient: FusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
     checkAndRequestPermission(Manifest.permission.ACCESS_FINE_LOCATION, requestCode)
