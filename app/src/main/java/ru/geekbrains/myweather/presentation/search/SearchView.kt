@@ -7,6 +7,5 @@ interface SearchView: MvpView {
 
     @SingleState
     fun showErrorCity(message: String)
-    @SingleState
-    fun saveNameCity(name: String)
+
 }

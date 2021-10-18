@@ -22,7 +22,6 @@ class SearchPresenter(
     fun clickCity(city: String){
         if (validateNameCity(city)) {
             router.navigateTo(AndroidScreens().current(city))
-            viewState.saveNameCity(city)
         }else{
             viewState.showErrorCity("Ошибка в названии города")
         }
@@ -46,7 +45,6 @@ class SearchPresenter(
     override fun onDestroy() {
         disposable.dispose()
         super.onDestroy()
-
     }
 
 }

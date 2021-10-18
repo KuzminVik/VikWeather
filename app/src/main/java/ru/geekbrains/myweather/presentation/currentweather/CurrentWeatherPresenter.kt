@@ -6,8 +6,8 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.plusAssign
 import moxy.MvpPresenter
 import ru.geekbrains.myweather.date.weather.WeatherRepository
+import ru.geekbrains.myweather.presentation.AndroidScreens
 import ru.geekbrains.myweather.scheduler.ISchedulers
-import ru.geekbrains.myweather.scheduler.MainSchedulers
 
 class CurrentWeatherPresenter(
     private val nameCity: String,
@@ -29,10 +29,14 @@ class CurrentWeatherPresenter(
             .getWeatherByName(name)
             .observeOn(schedulers.mainThread())
             .subscribeOn(schedulers.ioThread())
-            .subscribe(
-                viewState::showCurrentWeather,
-                viewState::showErrorCurrentWeather
-            )
+            .subscribe ({ it ->
+                viewState.showCurrentWeather(it)
+                viewState.saveNameCity(it.name)
+                viewState.setTitle("Моя погода")
+            },{
+                viewState.showErrorCurrentWeather(it)
+                router.navigateTo(AndroidScreens().search())
+        })
     }
 
     override fun onDestroy() {

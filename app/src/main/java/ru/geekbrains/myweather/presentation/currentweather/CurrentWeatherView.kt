@@ -18,4 +18,10 @@ interface CurrentWeatherView: MvpView {
     @SingleState
     fun showErrorCurrentWeather(e: Throwable?)
 
+    @SingleState
+    fun saveNameCity(name: String)
+
+    @SingleState
+    fun setTitle(title: String)
+
 }

@@ -1,5 +1,6 @@
 package ru.geekbrains.myweather.presentation.main
 
+import android.content.SharedPreferences
 import android.os.Bundle
 import com.github.terrakok.cicerone.androidx.AppNavigator
 import com.google.android.material.navigation.NavigationBarView
@@ -20,6 +21,9 @@ class MainActivity : AbsActivity(), MainView {
     @Inject
     lateinit var schedulers: ISchedulers
 
+    @Inject
+    lateinit var sharedPreferences: SharedPreferences
+
     private val presenter by moxyPresenter {
         MainPresenter(router = router, schedulers = schedulers) }
 
@@ -29,23 +33,24 @@ class MainActivity : AbsActivity(), MainView {
         setContentView(binding.root)
         presenter
 
-//        val toolbar = supportActionBar
+        val toolbar = supportActionBar
+        toolbar?.title = getString(R.string.my_weather)
         val navView = binding.navView as NavigationBarView
         navView.setOnItemSelectedListener {
             when (it.itemId) {
                 R.id.home -> {
                     presenter.clickHome()
-//                    toolbar?.title = it.title.toString()
+                    toolbar?.title = it.title.toString()
                     true
                 }
                 R.id.search -> {
                     presenter.clickSearch()
-//                    toolbar?.title = it.title.toString()
+                    toolbar?.title = it.title.toString()
                     true
                 }
                 R.id.settings -> {
                     presenter.clickSettings()
-//                    toolbar?.title = it.title.toString()
+                    toolbar?.title = it.title.toString()
                     true
                 }
                 else -> false
@@ -69,7 +74,6 @@ class MainActivity : AbsActivity(), MainView {
     }
 
     override fun getNameCity() {
-        val sharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE)
         val name = sharedPreferences.getString("cityName", " ") ?: " "
         presenter.init(name)
     }

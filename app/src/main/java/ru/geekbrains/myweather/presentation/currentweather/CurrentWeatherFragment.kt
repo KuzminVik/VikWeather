@@ -1,22 +1,22 @@
 package ru.geekbrains.myweather.presentation.currentweather
 
 import android.annotation.SuppressLint
+import android.content.SharedPreferences
 import android.net.Uri
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import ru.geekbrains.myweather.databinding.FragmentCurrentWeatherBinding
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.bumptech.glide.Glide
+import moxy.MvpAppCompatActivity
 import moxy.ktx.moxyPresenter
 import ru.geekbrains.myweather.presentation.abs.AbsFragment
 import ru.geekbrains.myweather.R.layout.fragment_current_weather
 import ru.geekbrains.myweather.date.weather.WeatherEntity
 import ru.geekbrains.myweather.date.weather.WeatherRepository
 import ru.geekbrains.myweather.presentation.arguments
-import ru.geekbrains.myweather.scheduler.ISchedulers
-import ru.geekbrains.myweather.scheduler.MainSchedulers
-import java.net.URL
 import javax.inject.Inject
 
 class CurrentWeatherFragment : AbsFragment(fragment_current_weather), CurrentWeatherView {
@@ -32,6 +32,9 @@ class CurrentWeatherFragment : AbsFragment(fragment_current_weather), CurrentWea
     private val nameCity: String by lazy {
         arguments?.getString(ARG_USER).orEmpty()
     }
+
+    @Inject
+    lateinit var sharedPreferences: SharedPreferences
 
     @Inject
     lateinit var repo: WeatherRepository
@@ -63,9 +66,13 @@ class CurrentWeatherFragment : AbsFragment(fragment_current_weather), CurrentWea
         Glide.with(this)
             .load(uri)
             .into(viewBinding.ivIcon)
-//        Glide.with(requireContext())
-//            .load("http://openweathermap.org/img/wn/${weatherEntity.icon}@2x.png")
-//            .into(viewBinding.ivIcon)
+        hideProgressBar()
+    }
+
+    fun hideProgressBar(){
+        viewBinding.constraintlayoutTop.visibility = View.VISIBLE
+        viewBinding.constraintlayoutCenter.visibility = View.VISIBLE
+        viewBinding.progressBar.visibility = View.GONE
     }
 
     override fun showErrorCurrentWeather(e: Throwable?) {
@@ -78,6 +85,16 @@ class CurrentWeatherFragment : AbsFragment(fragment_current_weather), CurrentWea
     fun convertUnixTime(unixTime: Long): String{
         return java.time.format.DateTimeFormatter.ISO_INSTANT
             .format(java.time.Instant.ofEpochSecond(unixTime))
+    }
+
+    override fun saveNameCity(name: String) {
+        val editor = sharedPreferences.edit()
+        editor.putString("cityName", name)
+        editor.apply()
+    }
+
+    override fun setTitle(title: String) {
+        (activity as? MvpAppCompatActivity)?.supportActionBar?.title = title
     }
 
 }

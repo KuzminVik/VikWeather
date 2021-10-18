@@ -10,6 +10,8 @@
         android:id="@+id/constraintlayout_top"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:visibility="gone"
+        tools:visibility="visible"
         tools:context=".presentation.currentweather.CurrentWeatherFragment">
 
         <ImageView
@@ -81,12 +83,26 @@
             app:layout_constraintEnd_toStartOf="@+id/iv_icon"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_temp" />
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="visible"
+            tools:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintlayout_center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:visibility="gone"
+        tools:visibility="visible"
         tools:context=".presentation.currentweather.CurrentWeatherFragment">
 
         <TextView
@@ -162,6 +178,5 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_visibility" />
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 
 </LinearLayout>

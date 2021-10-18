@@ -17,7 +17,8 @@ import javax.inject.Singleton
     [AndroidInjectionModule::class,
         ApiModule::class,
         StorageModule::class,
-        WeatherModule::class]
+        WeatherModule::class,
+        PreferenceModule::class]
 )
 
 interface BaseActivityComponent : AndroidInjector<BaseActivity> {

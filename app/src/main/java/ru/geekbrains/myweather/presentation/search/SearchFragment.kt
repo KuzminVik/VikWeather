@@ -6,7 +6,6 @@ import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import by.kirich1409.viewbindingdelegate.viewBinding
-import moxy.MvpAppCompatActivity
 import moxy.ktx.moxyPresenter
 import ru.geekbrains.myweather.databinding.FragmentSearchBinding
 import ru.geekbrains.myweather.presentation.abs.AbsFragment
@@ -14,7 +13,6 @@ import ru.geekbrains.myweather.R.layout.fragment_search
 import ru.geekbrains.myweather.date.weather.WeatherRepository
 import ru.geekbrains.myweather.presentation.arguments
 import ru.geekbrains.myweather.presentation.click
-import ru.geekbrains.myweather.presentation.currentweather.CurrentWeatherFragment
 import javax.inject.Inject
 
 class SearchFragment : AbsFragment(fragment_search), SearchView {
@@ -34,7 +32,7 @@ class SearchFragment : AbsFragment(fragment_search), SearchView {
         SearchPresenter(
             repo = repo,
             router = router,
-            schedulers = schedulers
+            schedulers = schedulers,
         ) }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -50,12 +48,4 @@ class SearchFragment : AbsFragment(fragment_search), SearchView {
         Toast.makeText(requireContext(),"ERROR ${TAG}: $message", Toast.LENGTH_LONG).show()
     }
 
-    override fun saveNameCity(name: String) {
-        val sharedPreferences = requireContext().getSharedPreferences("shared preferences",
-            MvpAppCompatActivity.MODE_PRIVATE
-        )
-        val editor = sharedPreferences.edit()
-        editor.putString("cityName", name)
-        editor.apply()
-    }
 }
