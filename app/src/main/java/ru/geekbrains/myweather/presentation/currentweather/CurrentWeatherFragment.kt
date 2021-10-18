@@ -6,11 +6,11 @@ import android.net.Uri
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.ActionBar
 import androidx.fragment.app.Fragment
 import ru.geekbrains.myweather.databinding.FragmentCurrentWeatherBinding
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.bumptech.glide.Glide
-import moxy.MvpAppCompatActivity
 import moxy.ktx.moxyPresenter
 import ru.geekbrains.myweather.presentation.abs.AbsFragment
 import ru.geekbrains.myweather.R.layout.fragment_current_weather
@@ -94,7 +94,7 @@ class CurrentWeatherFragment : AbsFragment(fragment_current_weather), CurrentWea
     }
 
     override fun setTitle(title: String) {
-        (activity as? MvpAppCompatActivity)?.supportActionBar?.title = title
+        actionBar.title = title
     }
 
 }

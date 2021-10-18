@@ -1,5 +1,6 @@
 package ru.geekbrains.myweather.presentation
 
+import androidx.appcompat.app.AppCompatActivity
 import com.github.terrakok.cicerone.Cicerone
 import dagger.android.AndroidInjector
 import dagger.android.DaggerApplication
@@ -19,6 +20,7 @@ class BaseActivity : DaggerApplication() {
                 withRouter(cicerone.router)
                 withNavigatorHolder(cicerone.getNavigatorHolder())
                 withSchedulers(MainSchedulers())
+//                withActivity(activity as AppCompatActivity)
             }
             .build()
 

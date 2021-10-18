@@ -2,6 +2,8 @@ package ru.geekbrains.myweather.presentation.abs
 
 import android.content.Context
 import androidx.annotation.LayoutRes
+import androidx.appcompat.app.ActionBar
+import androidx.appcompat.app.AppCompatActivity
 import com.github.terrakok.cicerone.Router
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
@@ -9,7 +11,6 @@ import dagger.android.HasAndroidInjector
 import dagger.android.support.AndroidSupportInjection
 import moxy.MvpAppCompatFragment
 import ru.geekbrains.myweather.scheduler.ISchedulers
-import ru.geekbrains.myweather.scheduler.MainSchedulers
 import javax.inject.Inject
 
 abstract class AbsFragment(@LayoutRes contentLayoutId: Int) : MvpAppCompatFragment(contentLayoutId),
@@ -24,8 +25,11 @@ abstract class AbsFragment(@LayoutRes contentLayoutId: Int) : MvpAppCompatFragme
     @Inject
     lateinit var schedulers: ISchedulers
 
+    lateinit var actionBar: ActionBar
+
     override fun onAttach(context: Context) {
         AndroidSupportInjection.inject(this)
+        actionBar = (activity as AppCompatActivity).supportActionBar!!
         super.onAttach(context)
     }
 
