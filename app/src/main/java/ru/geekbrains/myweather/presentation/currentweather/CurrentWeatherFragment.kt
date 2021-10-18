@@ -6,7 +6,6 @@ import android.net.Uri
 import android.util.Log
 import android.view.View
 import android.widget.Toast
-import androidx.appcompat.app.ActionBar
 import androidx.fragment.app.Fragment
 import ru.geekbrains.myweather.databinding.FragmentCurrentWeatherBinding
 import by.kirich1409.viewbindingdelegate.viewBinding

@@ -1,7 +1,6 @@
 package ru.geekbrains.myweather.di
 
 import android.content.Context
-import androidx.appcompat.app.AppCompatActivity
 import com.github.terrakok.cicerone.NavigatorHolder
 import com.github.terrakok.cicerone.Router
 import dagger.BindsInstance
@@ -19,8 +18,7 @@ import javax.inject.Singleton
         ApiModule::class,
         StorageModule::class,
         WeatherModule::class,
-        PreferenceModule::class,
-        ActionBarModule::class]
+        PreferenceModule::class]
 )
 
 interface BaseActivityComponent : AndroidInjector<BaseActivity> {
@@ -39,9 +37,6 @@ interface BaseActivityComponent : AndroidInjector<BaseActivity> {
 
         @BindsInstance
         fun withSchedulers(schedulers: ISchedulers): Builder
-
-//        @BindsInstance
-//        fun withActivity(appCompatActivity: AppCompatActivity): Builder
 
         fun build(): BaseActivityComponent
     }
