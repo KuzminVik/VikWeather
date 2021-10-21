@@ -1,7 +1,6 @@
 package ru.geekbrains.myweather.date.weather.datasource
 
 import io.reactivex.Maybe
-import io.reactivex.Single
 import ru.geekbrains.myweather.BuildConfig
 import ru.geekbrains.myweather.date.api.WeatherApi
 import ru.geekbrains.myweather.date.weather.AllWeather

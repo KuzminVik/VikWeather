@@ -1,41 +1,62 @@
 package ru.geekbrains.myweather.date.weather
 
-import io.reactivex.Maybe
+import android.annotation.SuppressLint
 import io.reactivex.Observable
-import io.reactivex.Single
 import ru.geekbrains.myweather.date.weather.datasource.CacheDataSource
 import ru.geekbrains.myweather.date.weather.datasource.NetworkDataSource
+import ru.geekbrains.myweather.date.weather.models.DayEntity
+import ru.geekbrains.myweather.date.weather.models.WeatherEntity
+import ru.geekbrains.myweather.date.weather.models.WeatherModel
 import javax.inject.Inject
 
 class WeatherRepositoryImpl
 @Inject constructor(
     private val network: NetworkDataSource,
     private val cache: CacheDataSource
-): WeatherRepository {
+) : WeatherRepository {
 
-    override fun getWeatherByName(name: String): Maybe<WeatherEntity> =
-        cache.getWeatherByName(name)
-            .onErrorResumeNext(
-                network.getLocationByCity(name)
-                    .flatMap { location ->
-                        network.getAllWeather(location.coord.lat, location.coord.lon).map { allWeather ->
-                            mapLocationAndAllWeather(location, allWeather)
-                        }
-                    }
-            ).flatMap {
-                cache.retainWeather(it)
-            }
+    override fun getWeatherModelFromCacheByName(name: String): Observable<WeatherModel> {
+        return Observable.zip(cache.getWeatherByName(name).toObservable(),
+            cache.getDailyByName(name).toObservable(),
+            { first, second ->
+                WeatherModel(first, second)
+            })
+    }
 
-    override fun getWeatherByCoord(lat: Double, lon: Double): Maybe<WeatherEntity> =
-        network.getLocationByCoord(lat, lon)
-            .flatMap {  location ->
+
+    @SuppressLint("CheckResult")
+    override fun getWeatherModelFromNetworkByName(name: String): Observable<WeatherModel> {
+        return network.getLocationByCity(name)
+            .flatMap { location ->
                 network.getAllWeather(location.coord.lat, location.coord.lon).map { allWeather ->
                     mapLocationAndAllWeather(location, allWeather)
+                }.map {
+                    cache.insertDaily(it.daily).blockingGet()
+                    cache.insertWeather(it.weatherEntity).blockingGet()
+                    return@map it
                 }
-            }
+            }.toObservable()
+    }
 
-    private fun mapLocationAndAllWeather(l: Location, w: AllWeather): WeatherEntity{
-        return WeatherEntity(
+    // Пока не используется, будет нужна при определении координат телефона
+    @SuppressLint("CheckResult")
+    override fun getWeatherModelFromNetworkByCoord(
+        lat: Double,
+        lon: Double
+    ): Observable<WeatherModel> =
+        network.getLocationByCoord(lat, lon)
+            .flatMap { location ->
+                network.getAllWeather(location.coord.lat, location.coord.lon).map { allWeather ->
+                    mapLocationAndAllWeather(location, allWeather)
+                }.map {
+                    cache.insertDaily(it.daily).blockingGet()
+                    cache.insertWeather(it.weatherEntity).blockingGet()
+                    return@map it
+                }
+            }.toObservable()
+
+    private fun mapLocationAndAllWeather(l: Location, w: AllWeather): WeatherModel {
+        val weather = WeatherEntity(
             id = l.id,
             name = l.name,
             lat = l.coord.lat,
@@ -54,6 +75,24 @@ class WeatherRepositoryImpl
             windSpeed = w.current.windSpeed,
             windDeg = w.current.windDeg,
             description = w.current.weather[0].description,
-            icon = w.current.weather[0].icon)
+            icon = w.current.weather[0].icon
+        )
+        val list = mutableListOf<DayEntity>()
+        for (el in w.daily) {
+            list.add(
+                DayEntity(
+                    parentName = l.name,
+                    dt = el.dt,
+                    tempDay = el.temp.day,
+                    tempNight = el.temp.night,
+                    pressure = el.pressure,
+                    humidity = el.humidity,
+                    description = el.weather[0].description,
+                    icon = el.weather[0].icon
+                )
+            )
+        }
+        return WeatherModel(weather, list)
     }
+
 }

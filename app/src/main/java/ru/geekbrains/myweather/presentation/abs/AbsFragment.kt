@@ -25,11 +25,11 @@ abstract class AbsFragment(@LayoutRes contentLayoutId: Int) : MvpAppCompatFragme
     @Inject
     lateinit var schedulers: ISchedulers
 
-    lateinit var actionBar: ActionBar
+    var actionBar: ActionBar? = null
 
     override fun onAttach(context: Context) {
         AndroidSupportInjection.inject(this)
-        actionBar = (activity as AppCompatActivity).supportActionBar!!
+        actionBar = (activity as AppCompatActivity).supportActionBar
         super.onAttach(context)
     }
 

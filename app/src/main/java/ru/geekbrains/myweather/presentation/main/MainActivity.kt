@@ -22,7 +22,7 @@ class MainActivity : AbsActivity(), MainView {
     lateinit var schedulers: ISchedulers
 
     @Inject
-    lateinit var sharedPreferences: SharedPreferences
+    lateinit var sharedPref: SharedPreferences
 
     private val presenter by moxyPresenter {
         MainPresenter(router = router, schedulers = schedulers) }
@@ -31,7 +31,6 @@ class MainActivity : AbsActivity(), MainView {
         super.onCreate(savedInstanceState)
         _binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        presenter
 
         val toolbar = supportActionBar
         toolbar?.title = getString(R.string.my_weather)
@@ -74,7 +73,7 @@ class MainActivity : AbsActivity(), MainView {
     }
 
     override fun getNameCity() {
-        val name = sharedPreferences.getString("cityName", " ") ?: " "
+        val name = sharedPref.getString("cityName", " ") ?: " "
         presenter.init(name)
     }
 

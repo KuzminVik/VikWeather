@@ -1,5 +1,6 @@
 package ru.geekbrains.myweather.presentation
 
+import androidx.appcompat.app.AppCompatDelegate
 import com.github.terrakok.cicerone.Cicerone
 import dagger.android.AndroidInjector
 import dagger.android.DaggerApplication
@@ -25,5 +26,6 @@ class BaseActivity : DaggerApplication() {
     override fun onCreate() {
         super.onCreate()
         RxJavaPlugins.setErrorHandler { }
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.getDefaultNightMode())
     }
 }

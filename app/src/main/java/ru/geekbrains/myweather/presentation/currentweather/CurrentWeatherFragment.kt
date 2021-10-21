@@ -3,19 +3,23 @@ package ru.geekbrains.myweather.presentation.currentweather
 import android.annotation.SuppressLint
 import android.content.SharedPreferences
 import android.net.Uri
+import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
 import ru.geekbrains.myweather.databinding.FragmentCurrentWeatherBinding
 import by.kirich1409.viewbindingdelegate.viewBinding
-import com.bumptech.glide.Glide
 import moxy.ktx.moxyPresenter
 import ru.geekbrains.myweather.presentation.abs.AbsFragment
 import ru.geekbrains.myweather.R.layout.fragment_current_weather
-import ru.geekbrains.myweather.date.weather.WeatherEntity
 import ru.geekbrains.myweather.date.weather.WeatherRepository
+import ru.geekbrains.myweather.date.weather.models.DayEntity
+import ru.geekbrains.myweather.date.weather.models.WeatherEntity
 import ru.geekbrains.myweather.presentation.arguments
+import ru.geekbrains.myweather.presentation.currentweather.adapter.CurrentAdapter
+import ru.geekbrains.myweather.presentation.setDrawableFromUri
 import javax.inject.Inject
 
 class CurrentWeatherFragment : AbsFragment(fragment_current_weather), CurrentWeatherView {
@@ -32,46 +36,58 @@ class CurrentWeatherFragment : AbsFragment(fragment_current_weather), CurrentWea
         arguments?.getString(ARG_USER).orEmpty()
     }
 
+    private val currentAdapter = CurrentAdapter()
+
     @Inject
     lateinit var sharedPreferences: SharedPreferences
 
     @Inject
     lateinit var repo: WeatherRepository
 
-    @Suppress("unused")
     private val presenter: CurrentWeatherPresenter by moxyPresenter {
         CurrentWeatherPresenter(
             nameCity = nameCity,
             repo = repo,
             router = router,
-            schedulers = schedulers
+            schedulers = schedulers,
+            sharedPreferences = sharedPreferences
         )
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        with(viewBinding){
+            rwDaily.adapter = currentAdapter
+            rwDaily.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+        }
     }
 
     @SuppressLint("SetTextI18n")
     override fun showCurrentWeather(weatherEntity: WeatherEntity) {
-        viewBinding.tvData.text = convertUnixTime(weatherEntity.dt)
-        viewBinding.tvCity.text = weatherEntity.name
-        viewBinding.tvTemp.text = "${weatherEntity.temp} °C"
-        viewBinding.tvTempFeel.text = "Ощущается как ${weatherEntity.feelsLike} °C"
-        viewBinding.tvDesc.text = weatherEntity.description
-        viewBinding.tvPressure.text = weatherEntity.pressure.toString()
-        viewBinding.tvHumidity.text = weatherEntity.humidity.toString()
-        viewBinding.tvDewPoint.text = weatherEntity.dewPoint.toString()
-        viewBinding.tvCloud.text = weatherEntity.clouds.toString()
-        viewBinding.tvVisibility.text = weatherEntity.visibility.toString()
-        viewBinding.tvWind.text = weatherEntity.windSpeed.toString()
-        val uri: Uri = Uri.parse("http://openweathermap.org/img/wn/${weatherEntity.icon}@2x.png")
-        Glide.with(this)
-            .load(uri)
-            .into(viewBinding.ivIcon)
-        hideProgressBar()
+        with(viewBinding){
+            tvData.text = convertUnixTime(weatherEntity.dt)
+            tvCity.text = weatherEntity.name
+            tvTemp.text = "${weatherEntity.temp} °C"
+            tvTempFeel.text = "Ощущается как ${weatherEntity.feelsLike} °C"
+            tvDesc.text = weatherEntity.description
+            tvPressure.text = weatherEntity.pressure.toString()
+            tvHumidity.text = weatherEntity.humidity.toString()
+            tvDewPoint.text = weatherEntity.dewPoint.toString()
+            tvCloud.text = weatherEntity.clouds.toString()
+            tvVisibility.text = weatherEntity.visibility.toString()
+            tvWind.text = weatherEntity.windSpeed.toString()
+            val uri: Uri = Uri.parse("http://openweathermap.org/img/wn/${weatherEntity.icon}@2x.png")
+            ivIcon.setDrawableFromUri(uri)
+            hideProgressBar()
+        }
     }
 
-    fun hideProgressBar(){
-        viewBinding.constraintlayoutTop.visibility = View.VISIBLE
-        viewBinding.constraintlayoutCenter.visibility = View.VISIBLE
-        viewBinding.progressBar.visibility = View.GONE
+    private fun hideProgressBar(){
+        with(viewBinding){
+            constraintlayoutTop.visibility = View.VISIBLE
+            constraintlayoutCenter.visibility = View.VISIBLE
+            progressBar.visibility = View.GONE
+        }
     }
 
     override fun showErrorCurrentWeather(e: Throwable?) {
@@ -81,19 +97,17 @@ class CurrentWeatherFragment : AbsFragment(fragment_current_weather), CurrentWea
         }
     }
 
-    fun convertUnixTime(unixTime: Long): String{
+    override fun showDaily(list: List<DayEntity>) {
+        currentAdapter.submitList(list)
+    }
+
+    private fun convertUnixTime(unixTime: Long): String{
         return java.time.format.DateTimeFormatter.ISO_INSTANT
             .format(java.time.Instant.ofEpochSecond(unixTime))
     }
 
-    override fun saveNameCity(name: String) {
-        val editor = sharedPreferences.edit()
-        editor.putString("cityName", name)
-        editor.apply()
-    }
-
     override fun setTitle(title: String) {
-        actionBar.title = title
+        actionBar!!.title = title
     }
 
 }

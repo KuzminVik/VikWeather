@@ -11,7 +11,7 @@ import javax.inject.Singleton
 class StorageModule {
 
     @Singleton
-    @Persisted
+    @DbPersisted
     @Provides
     fun provideWeatherDatabaseStorage(context: Context): WeatherStorage =
         Room.databaseBuilder(context, WeatherStorage::class.java, "weather.db")
@@ -20,7 +20,7 @@ class StorageModule {
             .build()
 
     @Singleton
-    @InMemory
+    @DbInMemory
     @Provides
     fun provideWeatherInMemoryDatabaseStorage(context: Context): WeatherStorage =
         Room.inMemoryDatabaseBuilder(context, WeatherStorage::class.java)

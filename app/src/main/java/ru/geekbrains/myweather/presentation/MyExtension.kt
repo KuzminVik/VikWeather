@@ -5,20 +5,33 @@ import android.app.Activity
 import android.content.DialogInterface
 import android.content.pm.PackageManager
 import android.location.Location
+import android.net.Uri
 import android.view.View
+import android.widget.ImageView
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import com.bumptech.glide.Glide
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 
+const val THEME_UNDEFINED = -1
+const val THEME_LIGHT = 0
+const val THEME_DARK = 1
+
 fun Fragment.arguments(vararg arguments: Pair<String, Any>): Fragment {
     this.arguments = bundleOf(*arguments)
     return this
+}
+
+fun ImageView.setDrawableFromUri(uri: Uri){
+    Glide.with(context)
+        .load(uri)
+        .into(this)
 }
 
 fun View.click(click: () -> Unit) = setOnClickListener { click() }

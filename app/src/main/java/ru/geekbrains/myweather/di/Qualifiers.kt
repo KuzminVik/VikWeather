@@ -3,7 +3,13 @@ package ru.geekbrains.myweather.di
 import javax.inject.Qualifier
 
 @Qualifier
-annotation class InMemory
+annotation class DbInMemory
 
 @Qualifier
-annotation class Persisted
+annotation class DbPersisted
+
+//@Qualifier
+//annotation class PrefCity
+//
+//@Qualifier
+//annotation class PrefTheme

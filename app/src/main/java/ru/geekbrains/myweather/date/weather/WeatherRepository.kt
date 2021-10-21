@@ -1,13 +1,16 @@
 package ru.geekbrains.myweather.date.weather
 
-import io.reactivex.Maybe
 import io.reactivex.Observable
-import io.reactivex.Single
+import ru.geekbrains.myweather.date.weather.models.WeatherModel
 
 interface WeatherRepository {
 
-    fun getWeatherByName(name: String): Maybe<WeatherEntity>
+    fun getWeatherModelFromCacheByName(name: String): Observable<WeatherModel>
 
-    fun getWeatherByCoord(lat: Double, lon: Double): Maybe<WeatherEntity>
+    fun getWeatherModelFromNetworkByName(name: String): Observable<WeatherModel>
+
+//    fun getWeatherByName(name: String): Maybe<WeatherEntity>
+
+    fun getWeatherModelFromNetworkByCoord(lat: Double, lon: Double): Observable<WeatherModel>
 
 }

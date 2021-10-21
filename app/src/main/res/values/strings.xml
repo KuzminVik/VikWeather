@@ -19,4 +19,11 @@
     <string name="visibility">Видимость</string>
     <string name="wind">скорость ветра</string>
     <string name="enterTheСity">Введите название города</string>
+    <string name="enable_dark_theme">Включить темную тему</string>
+    <string name="dark">Dark</string>
+    <string name="light_theme">Светлая тема</string>
+    <string name="dark_theme">Темная тема</string>
+    <string name="enable_theme">Изменить тему приложения</string>
+    <string name="enable1">Включить почасовой прогноз</string>
+    <string name="enable2">Включить прогноз на 7 дней</string>
 </resources>
