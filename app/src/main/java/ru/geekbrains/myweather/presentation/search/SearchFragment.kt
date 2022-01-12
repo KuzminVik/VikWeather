@@ -50,7 +50,7 @@ class SearchFragment : AbsFragment(fragment_search), SearchView, SearchAdapter.C
     }
 
     override fun showListCity(list: List<City>){
-        viewBinding.tvLabelListCity.visibility = if(list.isEmpty()) View.VISIBLE else View.GONE
+        viewBinding.tvLabelListCity.visibility = if(list.isEmpty()) View.GONE else View.VISIBLE
         viewBinding.rvListCity.visibility = View.VISIBLE
         searchAdapter.submitList(list)
     }
@@ -69,5 +69,4 @@ class SearchFragment : AbsFragment(fragment_search), SearchView, SearchAdapter.C
     override fun clickCity(name: String) {
         presenter.clickCity(name)
     }
-
 }

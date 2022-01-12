@@ -12,7 +12,6 @@ class SettingsPresenter(
 ): MvpPresenter<SettingsView>() {
 
     override fun onFirstViewAttach() {
-        viewState.initThemeListener()
         viewState.initTheme(getSavedTheme())
         viewState.initHourlySettings(isEnabledHourlyForecast())
         viewState.initDailySettings(isEnabledDailyForecast())
