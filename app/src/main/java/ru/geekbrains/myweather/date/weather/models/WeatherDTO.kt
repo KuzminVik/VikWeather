@@ -1,16 +1,14 @@
-package ru.geekbrains.myweather.date.weather
+package ru.geekbrains.myweather.date.weather.models
 
-import androidx.room.ColumnInfo
-import androidx.room.Embedded
-import androidx.room.Entity
-import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
 data class AllWeather(
     @SerializedName("current")
     val current: Current,
     @SerializedName("daily")
-    val daily: List<Day>
+    val daily: List<Day>,
+    @SerializedName("hourly")
+    val hourly: List<Hour>
 )
 
 data class Current(
@@ -43,9 +41,22 @@ data class Day(
     @SerializedName("weather") val weather: List<Weather>
 )
 
+data class Hour(
+    @SerializedName("dt") val dt: Long,
+    @SerializedName("temp") val temp: Double,
+    @SerializedName("pressure") val pressure: Int,
+    @SerializedName("humidity") val humidity: Int,
+    @SerializedName("clouds") val clouds: Int,
+    @SerializedName("visibility") val visibility: Int,
+    @SerializedName("wind_speed") val windSpeed: Double,
+    @SerializedName("weather") val weather: List<Weather>
+)
+
 data class Temp(
     @SerializedName("day") val day: Double,                 // Температура днем
-    @SerializedName("night") val night: Double              // Температура ночью
+    @SerializedName("night") val night: Double,              // Температура ночью
+    @SerializedName("eve") val eve: Double,                  // утром
+    @SerializedName("morn") val morn: Double               //вечером
 )
 
 data class Location(

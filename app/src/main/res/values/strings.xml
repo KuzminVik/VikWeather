@@ -1,23 +1,11 @@
 <resources>
-    <string name="app_name">MyWeather</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="app_name">VikWeather</string>
     <string name="my_weather">Моя погода</string>
     <string name="my_search">Поиск</string>
     <string name="my_settings">Настройки</string>
     <string name="icon">Иконка</string>
-    <string name="temperature">%1$d°</string>
     <string name="time">time</string>
     <string name="city">City</string>
-    <string name="descriptions">desription</string>
-    <string name="temp_feel">temp feel</string>
-    <string name="cloud_cover">Облачность</string>
-    <string name="pressure">Давление</string>
-    <string name="humidity">Влажность</string>
-    <string name="dew_point">Точка росы</string>
-    <string name="visibility">Видимость</string>
-    <string name="wind">скорость ветра</string>
     <string name="enterTheСity">Введите название города</string>
     <string name="enable_dark_theme">Включить темную тему</string>
     <string name="dark">Dark</string>
@@ -26,4 +14,40 @@
     <string name="enable_theme">Изменить тему приложения</string>
     <string name="enable1">Включить почасовой прогноз</string>
     <string name="enable2">Включить прогноз на 7 дней</string>
+    <string name="location_city">Location city</string>
+    <string name="icon_weather">icon weather</string>
+    <string name="Hourly_forecast">Прогноз на ближайшие 48 часов</string>
+    <string name="Forecast_for_the_week">Прогноз на ближайшие 7 дней</string>
+    <string name="now">Сейчас</string>
+    <string name="In_detail">Подробно</string>
+    <string name="test">test</string>
+    <string name="error">Ошибка!</string>
+    <string name="msg_no_data">Ничего не найдено. Возможно, вы ввели некорректное название. Попробуйте еще раз.</string>
+
+    // Path loading icon =========================================
+    <string name="path_icon">https://openweathermap.org/img/wn/%1$s@2x.png</string>
+
+    // Navigation titles =========================================
+    <string name="navigation_current">Погода</string>
+    <string name="navigation_search">Поиск</string>
+    <string name="navigation_settings">Настройки</string>
+
+    // Weather format strings =========================================
+    <string name="temp">%1$s °С</string>
+    <string name="temp_morn">Утром %1$s °С</string>
+    <string name="temp_day">Днем %1$s °С</string>
+    <string name="temp_eve">Вечером %1$s °С</string>
+    <string name="temp_night">Ночью %1$s °С</string>
+    <string name="temp_feel">Ощущается\n как %1$s °С</string>
+    <string name="pressure">Давление %1$s мм рт ст</string>
+    <string name="humidity">Влажность %1$s%2$s</string>
+    <string name="cloud_cover">Облачность %1$s%2$s</string>
+    <string name="dew_point">Точка росы %1$s °С</string>
+    <string name="visibility">Видимость %1$s м</string>
+    <string name="wind">Скорость ветра %1$s метр/сек</string>
+    <string name="percent">%</string>
+    <string name="desc_hourly_expand">Влажность %1$s%6$s. Давление %2$s мм рт ст. Облачность %3$s%6$s. Видимость %4$s м. Скорость ветра %5$s метр/сек.</string>
+    <string name="history_search">История поиска:</string>
+
+
 </resources>

@@ -3,23 +3,23 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_home">
+    app:startDestination="@+id/navigation_current">
 
     <fragment
-        android:id="@+id/navigation_home"
+        android:id="@+id/navigation_current"
         android:name="ru.geekbrains.myweather.presentation.currentweather.CurrentWeatherFragment"
-        android:label="@string/title_home"
+        android:label="@string/navigation_current"
         tools:layout="@layout/fragment_current_weather" />
 
     <fragment
-        android:id="@+id/navigation_dashboard"
+        android:id="@+id/navigation_search"
         android:name="ru.geekbrains.myweather.presentation.search.SearchFragment"
-        android:label="@string/title_dashboard"
+        android:label="@string/navigation_search"
         tools:layout="@layout/fragment_search" />
 
     <fragment
-        android:id="@+id/navigation_notifications"
+        android:id="@+id/navigation_settings"
         android:name="ru.geekbrains.myweather.presentation.settings.SettingsFragment"
-        android:label="@string/title_notifications"
+        android:label="@string/navigation_settings"
         tools:layout="@layout/fragment_settings" />
 </navigation>

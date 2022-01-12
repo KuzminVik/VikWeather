@@ -9,6 +9,7 @@ import ru.geekbrains.myweather.R
 import ru.geekbrains.myweather.databinding.ActivityMainBinding
 import ru.geekbrains.myweather.presentation.abs.AbsActivity
 import ru.geekbrains.myweather.scheduler.ISchedulers
+import ru.geekbrains.myweather.util.CITY_NAME
 import javax.inject.Inject
 
 class MainActivity : AbsActivity(), MainView {
@@ -73,7 +74,7 @@ class MainActivity : AbsActivity(), MainView {
     }
 
     override fun getNameCity() {
-        val name = sharedPref.getString("cityName", " ") ?: " "
+        val name = sharedPref.getString(CITY_NAME, " ") ?: " "
         presenter.init(name)
     }
 

@@ -14,18 +14,22 @@ data class WeatherEntity(
     @ColumnInfo(name = "dt") val dt: Long,
     @ColumnInfo(name = "sunrise") val sunrise: Long,
     @ColumnInfo(name = "sunset") val sunset: Long,
-    @ColumnInfo(name = "temp") val temp: Double,
-    @ColumnInfo(name = "feelsLike") val feelsLike: Double,
-    @ColumnInfo(name = "pressure") val pressure: Int,
-    @ColumnInfo(name = "humidity") val humidity: Int,
-    @ColumnInfo(name = "dewPoint") val dewPoint: Double,
-    @ColumnInfo(name = "uvi") val uvi: Double,
-    @ColumnInfo(name = "clouds") val clouds: Int,
-    @ColumnInfo(name = "visibility") val visibility: Int,
-    @ColumnInfo(name = "windSpeed") val windSpeed: Double,
-    @ColumnInfo(name = "windDeg") val windDeg: Double,
+    @ColumnInfo(name = "temp") val temp: String,
+    @ColumnInfo(name = "feelsLike") val feelsLike: String,
+    @ColumnInfo(name = "temp_day") val tempDay: String,
+    @ColumnInfo(name = "temp_night") val tempNight: String,
+    @ColumnInfo(name = "temp_eve") val tempEve: String,
+    @ColumnInfo(name = "temp_morn") val tempMorn: String,
+    @ColumnInfo(name = "pressure") val pressure: String,
+    @ColumnInfo(name = "humidity") val humidity: String,
+    @ColumnInfo(name = "dewPoint") val dewPoint: String,
+    @ColumnInfo(name = "uvi") val uvi: String,
+    @ColumnInfo(name = "clouds") val clouds: String,
+    @ColumnInfo(name = "visibility") val visibility: String,
+    @ColumnInfo(name = "windSpeed") val windSpeed: String,
+    @ColumnInfo(name = "windDeg") val windDeg: String,
     @ColumnInfo(name = "description") val description: String,
-    @ColumnInfo(name = "icon") val icon: String,              //URL is http://openweathermap.org/img/wn/10d@2x.png
+    @ColumnInfo(name = "icon") val icon: String              //URL is https://openweathermap.org/img/wn/10d@2x.png
 )
 
 @Entity(tableName = "daily")
@@ -34,10 +38,34 @@ data class DayEntity(
     @ColumnInfo(name = "id") val id: Int = 0,
     @ColumnInfo(name = "parent_name") val parentName: String,
     @ColumnInfo(name = "dt") val dt: Long,
-    @ColumnInfo(name = "temp_day") val tempDay: Double,
-    @ColumnInfo(name = "temp_night") val tempNight: Double,
-    @ColumnInfo(name = "pressure") val pressure: Int,
-    @ColumnInfo(name = "humidity") val humidity: Int,
+    @ColumnInfo(name = "temp_day") val tempDay: String,
+    @ColumnInfo(name = "temp_night") val tempNight: String,
+    @ColumnInfo(name = "temp_eve") val tempEve: String,
+    @ColumnInfo(name = "temp_morn") val tempMorn: String,
+    @ColumnInfo(name = "pressure") val pressure: String,
+    @ColumnInfo(name = "humidity") val humidity: String,
     @ColumnInfo(name = "description") val description: String,
     @ColumnInfo(name = "icon") val icon: String
+)
+
+@Entity(tableName = "hourly")
+data class HourEntity(
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "id") val id: Int = 0,
+    @ColumnInfo(name = "parent_name") val parentName: String,
+    @ColumnInfo(name = "dt") val dt: Long,
+    @ColumnInfo(name = "temp") val temp: String,
+    @ColumnInfo(name = "pressure") val pressure: String,
+    @ColumnInfo(name = "humidity") val humidity: String,
+    @ColumnInfo(name = "clouds") val clouds: String,
+    @ColumnInfo(name = "visibility") val visibility: String,
+    @ColumnInfo(name = "windSpeed") val windSpeed: String,
+    @ColumnInfo(name = "description") val description: String,
+    @ColumnInfo(name = "icon") val icon: String
+)
+
+@Entity(tableName = "city")
+data class City(
+    @PrimaryKey()
+    @ColumnInfo(name = "name") val name: String
 )

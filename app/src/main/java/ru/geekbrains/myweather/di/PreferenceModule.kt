@@ -10,17 +10,9 @@ import javax.inject.Singleton
 class PreferenceModule {
 
     @Singleton
-//    @PrefCity
     @Provides
     fun providesSharedPref(context: Context): SharedPreferences {
         return context.applicationContext.getSharedPreferences("PREFERENCES", Context.MODE_PRIVATE)
     }
-
-//    @Singleton
-//    @PrefTheme
-//    @Provides
-//    fun providesSharedPrefTheme(context: Context): SharedPreferences {
-//        return context.applicationContext.getSharedPreferences("PREFERENCES_THEME", Context.MODE_PRIVATE)
-//    }
 
 }

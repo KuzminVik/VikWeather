@@ -42,5 +42,4 @@ class MainPresenter(
     fun clickSettings() {
         router.navigateTo(AndroidScreens().setting())
     }
-
 }

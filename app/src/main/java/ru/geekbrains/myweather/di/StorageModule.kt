@@ -11,20 +11,11 @@ import javax.inject.Singleton
 class StorageModule {
 
     @Singleton
-    @DbPersisted
     @Provides
     fun provideWeatherDatabaseStorage(context: Context): WeatherStorage =
         Room.databaseBuilder(context, WeatherStorage::class.java, "weather.db")
             .fallbackToDestructiveMigration()
 //            .addMigrations(GitHub1to2Migration, GitHub2to3Migration)
-            .build()
-
-    @Singleton
-    @DbInMemory
-    @Provides
-    fun provideWeatherInMemoryDatabaseStorage(context: Context): WeatherStorage =
-        Room.inMemoryDatabaseBuilder(context, WeatherStorage::class.java)
-            .fallbackToDestructiveMigration()
             .build()
 
 }

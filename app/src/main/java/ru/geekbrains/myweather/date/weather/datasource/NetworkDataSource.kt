@@ -1,9 +1,8 @@
 package ru.geekbrains.myweather.date.weather.datasource
 
 import io.reactivex.Maybe
-import io.reactivex.Single
-import ru.geekbrains.myweather.date.weather.AllWeather
-import ru.geekbrains.myweather.date.weather.Location
+import ru.geekbrains.myweather.date.weather.models.AllWeather
+import ru.geekbrains.myweather.date.weather.models.Location
 
 interface NetworkDataSource {
 

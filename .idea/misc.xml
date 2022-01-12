@@ -5,12 +5,14 @@
       <map>
         <entry key="..\:/MyWeather/app/src/main/res/drawable-v24/ic_baseline_search_24.xml" value="0.2703125" />
         <entry key="..\:/MyWeather/app/src/main/res/layout/activity_main.xml" value="0.25416666666666665" />
-        <entry key="..\:/MyWeather/app/src/main/res/layout/fragment_current_weather.xml" value="0.33796296296296297" />
-        <entry key="..\:/MyWeather/app/src/main/res/layout/fragment_search.xml" value="0.4" />
+        <entry key="..\:/MyWeather/app/src/main/res/layout/fragment_current_weather.xml" value="0.20257234726688103" />
+        <entry key="..\:/MyWeather/app/src/main/res/layout/fragment_search.xml" value="0.264" />
         <entry key="..\:/MyWeather/app/src/main/res/layout/fragment_settings.xml" value="0.4" />
         <entry key="..\:/MyWeather/app/src/main/res/layout/fragment_test.xml" value="0.25416666666666665" />
         <entry key="..\:/MyWeather/app/src/main/res/layout/fragment_user_profile.xml" value="0.264" />
         <entry key="..\:/MyWeather/app/src/main/res/layout/item_daily.xml" value="0.536" />
+        <entry key="..\:/MyWeather/app/src/main/res/layout/item_hourly.xml" value="0.48548812664907653" />
+        <entry key="..\:/MyWeather/app/src/main/res/layout/item_search.xml" value="0.22592592592592592" />
         <entry key="..\:/MyWeather/app/src/main/res/menu/bottom_nav_menu.xml" value="0.22407407407407406" />
       </map>
     </option>

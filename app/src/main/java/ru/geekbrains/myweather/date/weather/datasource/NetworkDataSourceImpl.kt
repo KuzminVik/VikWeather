@@ -3,8 +3,8 @@ package ru.geekbrains.myweather.date.weather.datasource
 import io.reactivex.Maybe
 import ru.geekbrains.myweather.BuildConfig
 import ru.geekbrains.myweather.date.api.WeatherApi
-import ru.geekbrains.myweather.date.weather.AllWeather
-import ru.geekbrains.myweather.date.weather.Location
+import ru.geekbrains.myweather.date.weather.models.AllWeather
+import ru.geekbrains.myweather.date.weather.models.Location
 import javax.inject.Inject
 
 class NetworkDataSourceImpl

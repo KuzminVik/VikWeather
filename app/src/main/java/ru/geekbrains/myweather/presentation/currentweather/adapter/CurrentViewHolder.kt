@@ -1,12 +1,16 @@
 package ru.geekbrains.myweather.presentation.currentweather.adapter
 
-import android.net.Uri
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
-import ru.geekbrains.myweather.databinding.ItemDailyBinding
 import by.kirich1409.viewbindingdelegate.viewBinding
+import ru.geekbrains.myweather.R
+import ru.geekbrains.myweather.databinding.ItemDailyBinding
 import ru.geekbrains.myweather.date.weather.models.DayEntity
-import ru.geekbrains.myweather.presentation.setDrawableFromUri
+import ru.geekbrains.myweather.presentation.setIconWithGlide
+import java.time.Instant
+import java.time.ZoneId
+import java.time.format.DateTimeFormatter
+import java.time.format.FormatStyle
 
 class CurrentViewHolder(view: View): RecyclerView.ViewHolder(view) {
 
@@ -14,11 +18,16 @@ class CurrentViewHolder(view: View): RecyclerView.ViewHolder(view) {
 
     fun bind(day: DayEntity) {
         with(viewBinding) {
-            tvDate.text = day.dt.toString()
-            tvTempDay.text = day.tempDay.toString()
-            tvTempNight.text = day.tempNight.toString()
-            val uri: Uri = Uri.parse("http://openweathermap.org/img/wn/${day.icon}@2x.png")
-            ivIcon.setDrawableFromUri(uri)
+            tvDate.text = convertUnixTime(day.dt)
+            tvTempDay.text = itemView.context.resources.getString(R.string.temp_day, day.tempDay)
+            tvTempNight.text = itemView.context.resources.getString(R.string.temp_night, day.tempNight)
+            ivIcon.setIconWithGlide(day.icon)
         }
+    }
+
+    private fun convertUnixTime(unixTime: Long): String{
+        val dateTimeInstant = Instant.ofEpochSecond(unixTime)
+        val dateLocal = dateTimeInstant.atZone(ZoneId.systemDefault()).toLocalDateTime()
+        return dateLocal.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG))
     }
 }

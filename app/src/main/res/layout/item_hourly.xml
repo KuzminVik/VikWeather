@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/margin_micro">
+
+    <TextView
+        android:id="@+id/tv_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_mini"
+        android:layout_marginBottom="@dimen/margin_micro"
+        android:text="@string/test"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_icon_toggle"
+        app:layout_constraintStart_toEndOf="@+id/iv_icon_toggle" />
+
+    <ImageView
+        android:id="@+id/iv_icon_toggle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_micro"
+        android:contentDescription="@string/icon"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_baseline_expand_less_24" />
+
+    <TextView
+        android:id="@+id/tv_temp_hour"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_mini"
+        android:text="@string/test"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_time"
+        app:layout_constraintStart_toEndOf="@+id/tv_time" />
+
+    <ImageView
+        android:id="@+id/iv_icon_weather_hour"
+        android:layout_width="@dimen/size_icon_20"
+        android:layout_height="@dimen/size_icon_20"
+        android:layout_marginStart="@dimen/margin_mini"
+        android:contentDescription="@string/icon"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_temp_hour"
+        app:layout_constraintStart_toEndOf="@+id/tv_temp_hour"
+        app:srcCompat="@drawable/ic_dashboard_black_24dp" />
+
+    <TextView
+        android:id="@+id/tv_desc_hour"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_mini"
+        android:layout_marginEnd="@dimen/margin_mini"
+        android:layout_marginBottom="@dimen/margin_mini"
+        android:text="@string/test"
+        android:textColor="#000"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/tv_time"
+        app:layout_constraintTop_toBottomOf="@+id/iv_icon_toggle"
+        tools:visibility="visible" />
+
+    <TextView
+        android:id="@+id/tv_desc_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_mini"
+        android:layout_marginEnd="@dimen/margin_mini"
+        android:text="@string/test"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_icon_weather_hour"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/iv_icon_weather_hour" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
