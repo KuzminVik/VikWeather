@@ -32,31 +32,11 @@ class SearchPresenter(
     }
 
     fun clickCity(city: String){
-        if (validateNameCity(city)) {
-            router.navigateTo(AndroidScreens().current(city))
-        }else{
-            viewState.showErrorCity(ERROR_NAME_CITY)
-        }
-    }
-
-    // Валидация на два пробела подряд
-    private fun validateNameCity(s: String): Boolean {
-        var count = 0
-        for (i in s.indices) {
-            if (s[i] == ' ' && count == 0) {
-                count++
-            } else if (s[i] != ' ' && count == 1) {
-                count = 0
-            } else if (s[i] == ' ' && count != 0) {
-                return false
-            }
-        }
-        return true
+        router.navigateTo(AndroidScreens().current(city))
     }
 
     override fun onDestroy() {
         disposable.dispose()
         super.onDestroy()
     }
-
 }

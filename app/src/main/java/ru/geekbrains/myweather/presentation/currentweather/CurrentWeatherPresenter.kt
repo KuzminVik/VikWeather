@@ -16,7 +16,7 @@ import ru.geekbrains.myweather.util.KEY_HOURLY
 import ru.geekbrains.myweather.util.TITLE_MY_WEATHER
 import java.time.Instant
 
-class CurrentWeatherPresenter(
+open class CurrentWeatherPresenter(
     private val nameCity: String,
     private val repo: WeatherRepository,
     private val router: Router,
@@ -77,7 +77,7 @@ class CurrentWeatherPresenter(
     /**
      * Сохраняет название последнего просмотренного города
      */
-    private fun saveNameCity(name: String) =
+    fun saveNameCity(name: String) =
         sharedPreferences.edit().putString(CITY_NAME, name).apply()
 
     /**
