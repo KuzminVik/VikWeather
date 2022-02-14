@@ -32,7 +32,7 @@ class SearchPresenter(
     }
 
     fun clickCity(city: String){
-            router.navigateTo(AndroidScreens().current(city))
+        router.navigateTo(AndroidScreens().current(city))
     }
 
     override fun onDestroy() {
