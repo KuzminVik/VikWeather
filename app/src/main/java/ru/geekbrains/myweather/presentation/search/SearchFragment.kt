@@ -16,13 +16,14 @@ import ru.geekbrains.myweather.date.weather.models.City
 import ru.geekbrains.myweather.presentation.arguments
 import ru.geekbrains.myweather.presentation.click
 import ru.geekbrains.myweather.presentation.search.adapter.SearchAdapter
+import ru.geekbrains.myweather.util.ERROR_NAME_CITY
 import ru.geekbrains.myweather.util.TAG_SEARCH
 import javax.inject.Inject
 
 class SearchFragment : AbsFragment(fragment_search), SearchView, SearchAdapter.ClickCityDelegat {
 
     private val viewBinding: FragmentSearchBinding by viewBinding()
-
+    private val nameCityValidator = ValidateInputText()
     private val searchAdapter = SearchAdapter(this)
 
     @Inject
@@ -38,9 +39,10 @@ class SearchFragment : AbsFragment(fragment_search), SearchView, SearchAdapter.C
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewBinding.rvListCity.adapter = searchAdapter
+        viewBinding.tiEditText.addTextChangedListener(nameCityValidator)
         viewBinding.button4.click{
-            val city = viewBinding.tiEditText.text.toString()
-            presenter.clickCity(city)
+            if (nameCityValidator.isValid) presenter.clickCity(viewBinding.tiEditText.text.toString())
+            else showErrorCity(ERROR_NAME_CITY)
         }
     }
 
